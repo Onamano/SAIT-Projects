@@ -4,10 +4,11 @@ from socket import *
 # Declare Variables
 clientPort = 12000
 clientIP = '192.168.1.82'
+serverIP = '0.0.0.0'
 
 # Create UDP Socket and bind to port 12000
 serverSocket = socket(AF_INET, SOCK_DGRAM)
-serverSocket.bind(('', clientPort))
+serverSocket.bind((serverIP, clientPort))
 
 # Set time limit for keeping socket open (20 seconds)
 timeoutSeconds = 20
