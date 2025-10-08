@@ -37,16 +37,14 @@ try:
         elif numberFromClient % 2 == 0:
             reply = "Number is even"
             print(reply)
-            serverSocket.sendto(reply.encode(), (clientIP, clientPort))
-            modifiedReply, serverAddressUDP = serverSocket.recvfrom(2048)
         elif numberFromClient % 2 != 0:
             reply = "Number is odd"
             print(reply)
-            serverSocket.sendto(reply.encode(), (clientIP, clientPort))
-            modifiedReply, serverAddressUDP = serverSocket.recvfrom(2048)
         else:
             print("Socket connection closed")
             serverSocket.close()
+        serverSocket.sendto(reply.encode(), (clientIP, clientPort))
+        modifiedReply, serverAddressUDP = serverSocket.recvfrom(2048)
 except:
     serverSocket.close()
 
