@@ -56,6 +56,7 @@ except:
 
 
 # References
+# Base code outline from J. "F. Kurose and K. W. Ross, Computer networking : a top-down approach. Harlow Pearson, 2021."
 # https://sqlpey.com/python/solved-top-5-methods-to-set-timeout-on-pythons-socket-recv-method/ - Setting a timeout for the socket
 # https://www.programiz.com/python-programming/examples/odd-even - number comparisons
 # https://thelinuxcode.com/send_receive_udp_python/ - General troubleshooting help with echoing the calculations
