@@ -18,9 +18,8 @@ try:
         message = userMessage
         
         # Receive data from client and print to console, size is 2048 bytes
-        # reply, clientAddress = clientSocket.recvfrom(2048)
-        # modifiedReply = reply.decode()
-        # clientSocket.sendto(modifiedReply.encode(), clientAddress)
-        # print("Received from Client: " + modifiedReply)
+        reply, clientAddress = clientSocket.recvfrom(2048)
+        modifiedReply = reply.decode()
+        print("Received from Server: " + modifiedReply)
 except:
     clientSocket.close()
