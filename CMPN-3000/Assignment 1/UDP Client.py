@@ -2,7 +2,7 @@
 from socket import *
 
 # Declare Variables
-serverSocketUDP = '192.168.1.78'                                  # IP Address for the UDP server
+serverIP = '192.168.1.78'                                       # IP Address for the UDP server
 serverPortUDP = 12000                                           # Port number for socket connection
 message = ''                                                    # Placeholder for user input variable
 
@@ -13,7 +13,7 @@ clientSocketUDP = socket(AF_INET, SOCK_DGRAM)
 try:
     while message != "Q":
         userMessage = input("Enter a number (Q to exit): ")
-        clientSocketUDP.sendto(userMessage.encode(), (serverSocketUDP, serverPortUDP))
+        clientSocketUDP.sendto(userMessage.encode(), (serverIP, serverPortUDP))
         modifiedMessage, serverAddressUDP = clientSocketUDP.recvfrom(2048)
         message = userMessage
 except:

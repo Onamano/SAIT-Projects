@@ -2,12 +2,12 @@
 from socket import *
 
 # Declare Variables
-clientPortUDP = 12000
-clientNameUDP = '192.168.1.82'
+clientPort = 12000
+clientIP = '192.168.1.82'
 
 # Create UDP Socket and bind to port 12000
 serverSocketUDP = socket(AF_INET, SOCK_DGRAM)
-serverSocketUDP.bind(('', clientPortUDP))
+serverSocketUDP.bind(('', clientPort))
 
 # Set time limit for keeping socket open (20 seconds)
 timeoutSeconds = 20
@@ -37,11 +37,11 @@ try:
         elif numberFromClient % 2 == 0:
             reply = "Number is even"
             print(reply)
-            serverSocketUDP.sendto(reply.encode(), (clientNameUDP, clientPortUDP))
+            serverSocketUDP.sendto(reply.encode(), (clientIP, clientPort))
         elif numberFromClient % 2 != 0:
             reply = "Number is odd"
             print(reply)
-            serverSocketUDP.sendto(reply.encode(), (clientNameUDP, clientPortUDP))
+            serverSocketUDP.sendto(reply.encode(), (clientIP, clientPort))
         else:
             print("Socket connection closed")
             serverSocketUDP.close()
