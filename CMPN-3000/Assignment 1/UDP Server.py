@@ -6,47 +6,49 @@ clientPort = 12000
 clientIP = '192.168.1.82'
 
 # Create UDP Socket and bind to port 12000
-serverSocketUDP = socket(AF_INET, SOCK_DGRAM)
-serverSocketUDP.bind(('', clientPort))
+serverSocket = socket(AF_INET, SOCK_DGRAM)
+serverSocket.bind(('', clientPort))
 
 # Set time limit for keeping socket open (20 seconds)
 timeoutSeconds = 20
-serverSocketUDP.settimeout(timeoutSeconds)
+serverSocket.settimeout(timeoutSeconds)
 
 # Confirm server is listening
 print('The Server is ready to receive')
 
 try:
     while True:
-        # Receive data from client and print to console
-        message, clientAddress = serverSocketUDP.recvfrom(2048)
-        modifiedMessageUDP = message.decode()
-        serverSocketUDP.sendto(modifiedMessageUDP.encode(), clientAddress)
-        print("Received from Client: " + modifiedMessageUDP)
+        # Receive data from client and print to console, size is 2048 bytes
+        message, clientAddress = serverSocket.recvfrom(2048)
+        modifiedMessage = message.decode()
+        serverSocket.sendto(modifiedMessage.encode(), clientAddress)
+        print("Received from Client: " + modifiedMessage)
         
         # Convert number from string to integer
-        if modifiedMessageUDP != "Q":
-            numberFromClient = modifiedMessageUDP
+        if modifiedMessage != "Q":
+            numberFromClient = modifiedMessage
             numberFromClient = int(numberFromClient)
 
         # Calculations
-        if modifiedMessageUDP == "Q":
+        if modifiedMessage == "Q":
             reply = "Socket connection closed by user"
             print(reply)
-            serverSocketUDP.close()
+            serverSocket.close()
         elif numberFromClient % 2 == 0:
             reply = "Number is even"
             print(reply)
-            serverSocketUDP.sendto(reply.encode(), (clientIP, clientPort))
+            serverSocket.sendto(reply.encode(), (clientIP, clientPort))
+            modifiedReply, serverAddressUDP = serverSocket.recvfrom(2048)
         elif numberFromClient % 2 != 0:
             reply = "Number is odd"
             print(reply)
-            serverSocketUDP.sendto(reply.encode(), (clientIP, clientPort))
+            serverSocket.sendto(reply.encode(), (clientIP, clientPort))
+            modifiedReply, serverAddressUDP = serverSocket.recvfrom(2048)
         else:
             print("Socket connection closed")
-            serverSocketUDP.close()
+            serverSocket.close()
 except:
-    serverSocketUDP.close()
+    serverSocket.close()
 
 
 
