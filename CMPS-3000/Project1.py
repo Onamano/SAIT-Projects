@@ -1,21 +1,24 @@
-courseMaterial = [
-    {},
-    {},
-    {},
-]
 
-studentAssignments = [
-    {},
-    {},
-    {},
-]
 
 usersList = [
 	{'id': 100, 'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
     {'id': 200, 'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
     {'id': 300, 'username': 'Instructor2', 'password': 'password2', 'role': 'instructor', 'isActive': False},
     {'id': 400, 'username': 'Instructor3', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 500, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
+    {'id': 500, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
+    {'id': 600, 'username': 'Student2', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
+]
+
+courseMaterial = [
+    {'Course': 'Science', 'Grade': 85},
+    {'Course': 'Math', 'Grade': 75},
+    {'Course': 'English', 'Grade': 95},
+]
+
+studentAssignments = [
+    {},
+    {},
+    {},
 ]
 
 accessLevel = ''
@@ -55,8 +58,11 @@ def userAuth():
                 print("Student-level access granted")
                 accessLevel = 'student'
 
-def coursesAndGrades():
-    "ex"
+#Prints courses and grades to the user
+def viewCoursesAndGrades():
+    for entry in range(len(courseMaterial)):
+        #Prints based on the value of 'Course' and 'Grade' from list of dicts
+        print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']}")
 
 def editCoursesAndGrades():
     "ex"
@@ -67,21 +73,35 @@ def editCourseAdmin():
 def uploadAssignments():
     "ex"
 
+#End goal of function is to display students and provide option to input a value for key 'notification' in usersList
 def notifyStudent():
-    "ex"
+    for user_entry in range(len(usersList)):
+        if usersList[user_entry]['role'] == 'student':
+            print(f" {usersList[user_entry]['username']}")
+
 
 #Main function for the learning platform access system
 def systemLoop():
     print("Learning Platform Access System")
     userLogin()
     userAuth()
-    #print("Please choose from the following options:")
+    
     if accessLevel == 'admin':
-        print("Admin page")
+        print("Admin Options: ")
     elif accessLevel == 'instructor':
-        print("Instructor page")
+        print("Instructor Options: ")
     elif accessLevel == 'student':
-        print("Student page")
+        print("Student Options: ")
+        print("[1] - View Courses and Grades")
+        print("[2] - Upload Assignment")
+        print("[3] - View Notifications")
+        optionSelect = input("Please select an option: ")
+        if optionSelect == "1":
+            viewCoursesAndGrades()
+        elif optionSelect == "2":
+            print("Upload Assignment")
+        elif optionSelect == "3":
+            print("Notification goes here")
     else:
         print("Authentication failed, please retry")
     
