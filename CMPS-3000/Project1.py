@@ -78,34 +78,53 @@ def notifyStudent():
     for user_entry in range(len(usersList)):
         if usersList[user_entry]['role'] == 'student':
             print(f" {usersList[user_entry]['username']}")
+    userSelect = input("Select the student you wish to notify: ")
 
 
 #Main function for the learning platform access system
 def systemLoop():
-    print("Learning Platform Access System")
-    userLogin()
-    userAuth()
-    
-    if accessLevel == 'admin':
-        print("Admin Options: ")
-    elif accessLevel == 'instructor':
-        print("Instructor Options: ")
-    elif accessLevel == 'student':
-        print("Student Options: ")
-        print("[1] - View Courses and Grades")
-        print("[2] - Upload Assignment")
-        print("[3] - View Notifications")
-        optionSelect = input("Please select an option: ")
-        if optionSelect == "1":
-            viewCoursesAndGrades()
-        elif optionSelect == "2":
-            print("Upload Assignment")
-        elif optionSelect == "3":
-            print("Notification goes here")
-    else:
-        print("Authentication failed, please retry")
-    
-    #print(accessLevel)
+    #Loop to continue execution of program
+    while True:
+        print("Learning Platform Access System")
+        print("[1] - Log In")
+        print("[2] - Exit")
+        loginOrExit = input("Please select an option: ")
+        if loginOrExit == "1":
+            userLogin()
+            userAuth()
+            if accessLevel == 'admin':
+                print("Admin Options: ")
+                print("[1] - View Courses and Grades")
+                print("[2] - Edit Courses")
+                print("[3] - Edit Grades")
+                print("[4] - Log Out")
+            elif accessLevel == 'instructor':
+                print("Instructor Options: ")
+                print("[1] - View Courses and Grades")
+                print("[2] - Edit Grades")
+                print("[3] - Log Out")
+            elif accessLevel == 'student':
+                #Continuously loops through student options until logout
+                while True:
+                    print("Student Options: ")
+                    print("[1] - View Courses and Grades")
+                    print("[2] - Upload Assignment")
+                    print("[3] - View Notifications")
+                    print("[4] - Log Out")
+                    optionSelect = input("Please select an option: ")
+                    if optionSelect == "1":
+                        viewCoursesAndGrades()
+                    elif optionSelect == "2":
+                        print("Upload Assignment")
+                    elif optionSelect == "3":
+                        print("Notification goes here")
+                    elif optionSelect == "4":
+                        print("Logging out...")
+                        break
+            else:
+                print("Authentication failed, please retry")
+        elif loginOrExit == "2":
+            break
 
 systemLoop()
 #References
