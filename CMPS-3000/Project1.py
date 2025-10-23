@@ -3,10 +3,7 @@
 usersList = [
 	{'id': 100, 'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
     {'id': 200, 'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 300, 'username': 'Instructor2', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 400, 'username': 'Instructor3', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 500, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
-    {'id': 600, 'username': 'Student2', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
+    {'id': 300, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
 ]
 
 courseMaterial = [
@@ -16,9 +13,9 @@ courseMaterial = [
 ]
 
 studentAssignments = [
-    {},
-    {},
-    {},
+    {'Assignment 1': ''},
+    {'Assignment 2': ''},
+    {'Assignment 3': ''},
 ]
 
 accessLevel = ''
@@ -73,13 +70,9 @@ def editCourseAdmin():
 def uploadAssignments():
     "ex"
 
-#End goal of function is to display students and provide option to input a value for key 'notification' in usersList
+#Prints that x number of assignments have been graded to student based on the courseMaterial list length
 def notifyStudent():
-    for user_entry in range(len(usersList)):
-        if usersList[user_entry]['role'] == 'student':
-            print(f" {usersList[user_entry]['username']}")
-    userSelect = input("Select the student you wish to notify: ")
-
+    print(f"You have {len(courseMaterial)} new grades to view")
 
 #Main function for the learning platform access system
 def systemLoop():
@@ -139,7 +132,7 @@ def systemLoop():
                     elif optionSelect == "2":
                         print("Upload Assignment")
                     elif optionSelect == "3":
-                        print("Notification goes here")
+                        notifyStudent()
                     elif optionSelect == "4":
                         print("Logging out...")
                         break
