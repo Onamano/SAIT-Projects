@@ -67,8 +67,20 @@ def editCoursesAndGrades():
 def editCourseAdmin():
     "ex"
 
+#Takes user input and assigns as value to specified key in studentAssignments
 def uploadAssignments():
-    "ex"
+    for entry in range(len(studentAssignments)):
+        print(f" {studentAssignments[entry]}")
+    assignment = input("Select the assignment you wish to upload: ")
+    if assignment == "1":
+        upload = input("Enter your assignment: ")
+        studentAssignments[0]['Assignment 1'] = upload
+    elif assignment == "2":
+        upload = input("Enter your assignment: ")
+        studentAssignments[1]['Assignment 2'] = upload
+    elif assignment == "3":
+        upload = input("Enter your assignment: ")
+        studentAssignments[2]['Assignment 3'] = upload
 
 #Prints that x number of assignments have been graded to student based on the courseMaterial list length
 def notifyStudent():
@@ -130,7 +142,7 @@ def systemLoop():
                     if optionSelect == "1":
                         viewCoursesAndGrades()
                     elif optionSelect == "2":
-                        print("Upload Assignment")
+                        uploadAssignments()
                     elif optionSelect == "3":
                         notifyStudent()
                     elif optionSelect == "4":
