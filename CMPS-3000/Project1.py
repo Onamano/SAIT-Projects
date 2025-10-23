@@ -1,13 +1,21 @@
-
-
 courseMaterial = [
-    {}
+    {},
+    {},
+    {},
+]
+
+studentAssignments = [
+    {},
+    {},
+    {},
 ]
 
 usersList = [
 	{'id': 100, 'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
     {'id': 200, 'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 300, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
+    {'id': 300, 'username': 'Instructor2', 'password': 'password2', 'role': 'instructor', 'isActive': False},
+    {'id': 400, 'username': 'Instructor3', 'password': 'password2', 'role': 'instructor', 'isActive': False},
+    {'id': 500, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
 ]
 
 accessLevel = ''
@@ -67,8 +75,17 @@ def systemLoop():
     print("Learning Platform Access System")
     userLogin()
     userAuth()
-    print("Please choose from the following options:")
-    print(accessLevel)
+    #print("Please choose from the following options:")
+    if accessLevel == 'admin':
+        print("Admin page")
+    elif accessLevel == 'instructor':
+        print("Instructor page")
+    elif accessLevel == 'student':
+        print("Student page")
+    else:
+        print("Authentication failed, please retry")
+    
+    #print(accessLevel)
 
 systemLoop()
 #References
