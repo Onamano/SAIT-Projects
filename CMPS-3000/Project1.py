@@ -3,7 +3,7 @@
 usersList = [
 	{'id': 100, 'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
     {'id': 200, 'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 300, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False, 'notification': ''},
+    {'id': 300, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
 ]
 
 courseMaterial = [
@@ -27,7 +27,7 @@ def userLogin():
     password = input("Please enter your password: ")
     
     #Iterates through the users list to find a username and password match
-    for user_entry in range(len(usersList)):                                            #len used to return user_entry as int
+    for user_entry in range(len(usersList)):
         
         #Welcomes the user and sets isActive to True if inputs match with dict
         if username == usersList[user_entry]['username'] and password == usersList[user_entry]['password']:
@@ -48,10 +48,10 @@ def userAuth():
             if usersList[user_entry]['role'] == 'admin':
                 print("Admin-level access granted")
                 accessLevel = 'admin'
-            if usersList[user_entry]['role'] == 'instructor':
+            elif usersList[user_entry]['role'] == 'instructor':
                 print("Instructor-level access granted")
                 accessLevel = 'instructor'
-            if usersList[user_entry]['role'] == 'student':
+            elif usersList[user_entry]['role'] == 'student':
                 print("Student-level access granted")
                 accessLevel = 'student'
 
@@ -84,7 +84,7 @@ def uploadAssignments():
 
 #Prints that x number of assignments have been graded to student based on the courseMaterial list length
 def notifyStudent():
-    print(f"You have {len(courseMaterial)} new grades to view")
+    print(f"You have {len(courseMaterial)} new grades to view!")
 
 #Main function for the learning platform access system
 def systemLoop():
@@ -114,6 +114,7 @@ def systemLoop():
                         print("Edit Grades")
                     elif optionSelect == "4":
                         print("Logging out...")
+                        usersList[0]['isActive'] = False
                         break
             elif accessLevel == 'instructor':
                 #Continuously loops through options until logout
@@ -129,6 +130,7 @@ def systemLoop():
                         print("Edit Grades")
                     elif optionSelect == "3":
                         print("Logging out...")
+                        usersList[1]['isActive'] = False
                         break
             elif accessLevel == 'student':
                 #Continuously loops through options until logout
@@ -147,12 +149,17 @@ def systemLoop():
                         notifyStudent()
                     elif optionSelect == "4":
                         print("Logging out...")
+                        usersList[2]['isActive'] = False
                         break
             else:
                 print("Authentication failed, please retry")
+        
+        #Exits while loop, ending execution
         elif loginOrExit == "2":
             break
 
 systemLoop()
+
 #References
 # https://stackoverflow.com/questions/52765473/how-do-i-check-for-a-user-name-and-associated-password-in-a-list-of-dictionaries
+# CMPS Course materials
