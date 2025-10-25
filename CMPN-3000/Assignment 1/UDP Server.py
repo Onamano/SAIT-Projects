@@ -50,9 +50,8 @@ def udpServer (clientIP, clientPort):
 
 if __name__ == "__main__":
     clientPort = 12000
-    clientIP = '192.168.1.82'
     serverIP = '0.0.0.0'
-    udpServer(clientIP, clientPort)
+    udpServer(serverIP, clientPort)
 
 
 
