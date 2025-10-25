@@ -1,7 +1,7 @@
 # Imports
 from socket import *
 
-def udpServer (clientIP, clientPort):
+def udpServer (serverIP, clientPort):
     # Create UDP Socket and bind to port 12000
     serverSocket = socket(AF_INET, SOCK_DGRAM)
     serverSocket.bind((serverIP, clientPort))
