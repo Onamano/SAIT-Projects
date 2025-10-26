@@ -5,9 +5,9 @@ usersList = [
 ]
 
 courseMaterial = [
-    {'Course': 'Science [1]', 'Grade': 85, 'Instructor': None},
-    {'Course': 'Math [2]', 'Grade': 75, 'Instructor': None},
-    {'Course': 'English [3]', 'Grade': 95, 'Instructor': None},
+    {'Course': 'Science [1]', 'Grade': 85, 'Instructor': None, 'Room': 201},
+    {'Course': 'Math [2]', 'Grade': 75, 'Instructor': None, 'Room': 301},
+    {'Course': 'English [3]', 'Grade': 95, 'Instructor': None, 'Room': 401},
 ]
 
 studentAssignments = [
@@ -53,11 +53,11 @@ def userAuth():
                 print("Student-level access granted")
                 accessLevel = 'student'
 
-#Prints courses, grades, and the course instructor to the user
+#Prints courses, grades, course instructor, and course room to the user
 def viewCoursesAndGrades():
     for entry in range(len(courseMaterial)):
         #Prints based on the value of 'Course' and 'Grade' from list of dicts
-        print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']} - Current Instructor: {courseMaterial[entry]['Instructor']}")
+        print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']} - Current Instructor: {courseMaterial[entry]['Instructor']} - Current Room: {courseMaterial[entry]['Room']}")
 
 #Takes user input as integer to assign as the student's grade for the specified course
 def editGrades():
@@ -65,29 +65,35 @@ def editGrades():
         print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']}")
     course = input("Select the course you wish to set a grade for: ")
     if course == "1":
-        courseGrade  = input("Enter the course grade: ")
+        courseGrade = input("Enter the course grade: ")
         courseMaterial[0]['Grade'] = courseGrade
     elif course == "2":
-        courseGrade  = input("Enter the course grade: ")
+        courseGrade = input("Enter the course grade: ")
         courseMaterial[1]['Grade'] = courseGrade
     elif course == "3":
-        courseGrade  = input("Enter the course grade: ")
+        courseGrade = input("Enter the course grade: ")
         courseMaterial[2]['Grade'] = courseGrade
 
-#Takes user input to assign a course instructor
+#Takes user input to assign a course instructor and room number
 def editCourseAdmin():
     for entry in range(len(courseMaterial)):
-        print(f" {courseMaterial[entry]['Course']} - Current Instructor: {courseMaterial[entry]['Instructor']}")
+        print(f" {courseMaterial[entry]['Course']} - Current Instructor: {courseMaterial[entry]['Instructor']} - Current Room: {courseMaterial[entry]['Room']}")
     course = input("Select the course you wish to set an instructor for: ")
     if course == "1":
-        courseInstructor  = input("Enter the instructor's username: ")
+        courseInstructor = input("Enter the instructor's username: ")
         courseMaterial[0]['Instructor'] = courseInstructor
+        courseRoom = input("Enter the room number of the course: ")
+        courseMaterial[0]['Room'] = courseRoom
     elif course == "2":
-        courseInstructor  = input("Enter the instructor's username: ")
+        courseInstructor = input("Enter the instructor's username: ")
         courseMaterial[1]['Instructor'] = courseInstructor
+        courseRoom = input("Enter the room number of the course: ")
+        courseMaterial[1]['Room'] = courseRoom
     elif course == "3":
-        courseInstructor  = input("Enter the instructor's username: ")
+        courseInstructor = input("Enter the instructor's username: ")
         courseMaterial[2]['Instructor'] = courseInstructor
+        courseRoom = input("Enter the room number of the course: ")
+        courseMaterial[2]['Room'] = courseRoom
 
 #Takes user input and assigns as value to specified key in studentAssignments
 def uploadAssignments():
