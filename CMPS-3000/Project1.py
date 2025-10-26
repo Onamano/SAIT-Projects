@@ -1,15 +1,13 @@
-
-
 usersList = [
-	{'id': 100, 'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
-    {'id': 200, 'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
-    {'id': 300, 'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
+	{'username': 'Admin', 'password': 'password1', 'role': 'admin', 'isActive': False},
+    {'username': 'Instructor', 'password': 'password2', 'role': 'instructor', 'isActive': False},
+    {'username': 'Student', 'password': 'password3', 'role': 'student', 'isActive': False},
 ]
 
 courseMaterial = [
-    {'Course': 'Science', 'Grade': 85},
-    {'Course': 'Math', 'Grade': 75},
-    {'Course': 'English', 'Grade': 95},
+    {'Course': 'Science [1]', 'Grade': 85, 'Instructor': None},
+    {'Course': 'Math [2]', 'Grade': 75, 'Instructor': None},
+    {'Course': 'English [3]', 'Grade': 95, 'Instructor': None},
 ]
 
 studentAssignments = [
@@ -55,17 +53,41 @@ def userAuth():
                 print("Student-level access granted")
                 accessLevel = 'student'
 
-#Prints courses and grades to the user
+#Prints courses, grades, and the course instructor to the user
 def viewCoursesAndGrades():
     for entry in range(len(courseMaterial)):
         #Prints based on the value of 'Course' and 'Grade' from list of dicts
+        print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']} - Current Instructor: {courseMaterial[entry]['Instructor']}")
+
+#Takes user input as integer to assign as the student's grade for the specified course
+def editGrades():
+    for entry in range(len(courseMaterial)):
         print(f" {courseMaterial[entry]['Course']}: {courseMaterial[entry]['Grade']}")
+    course = input("Select the course you wish to set a grade for: ")
+    if course == "1":
+        courseGrade  = input("Enter the course grade: ")
+        courseMaterial[0]['Grade'] = courseGrade
+    elif course == "2":
+        courseGrade  = input("Enter the course grade: ")
+        courseMaterial[1]['Grade'] = courseGrade
+    elif course == "3":
+        courseGrade  = input("Enter the course grade: ")
+        courseMaterial[2]['Grade'] = courseGrade
 
-def editCoursesAndGrades():
-    "ex"
-
+#Takes user input to assign a course instructor
 def editCourseAdmin():
-    "ex"
+    for entry in range(len(courseMaterial)):
+        print(f" {courseMaterial[entry]['Course']} - Current Instructor: {courseMaterial[entry]['Instructor']}")
+    course = input("Select the course you wish to set an instructor for: ")
+    if course == "1":
+        courseInstructor  = input("Enter the instructor's username: ")
+        courseMaterial[0]['Instructor'] = courseInstructor
+    elif course == "2":
+        courseInstructor  = input("Enter the instructor's username: ")
+        courseMaterial[1]['Instructor'] = courseInstructor
+    elif course == "3":
+        courseInstructor  = input("Enter the instructor's username: ")
+        courseMaterial[2]['Instructor'] = courseInstructor
 
 #Takes user input and assigns as value to specified key in studentAssignments
 def uploadAssignments():
@@ -109,9 +131,9 @@ def systemLoop():
                     if optionSelect == "1":
                         viewCoursesAndGrades()
                     elif optionSelect == "2":
-                        print("Edit Courses")
+                        editCourseAdmin()
                     elif optionSelect == "3":
-                        print("Edit Grades")
+                        editGrades()
                     elif optionSelect == "4":
                         print("Logging out...")
                         usersList[0]['isActive'] = False
@@ -127,7 +149,7 @@ def systemLoop():
                     if optionSelect == "1":
                         viewCoursesAndGrades()
                     elif optionSelect == "2":
-                        print("Edit Grades")
+                        editGrades()
                     elif optionSelect == "3":
                         print("Logging out...")
                         usersList[1]['isActive'] = False
