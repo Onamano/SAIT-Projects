@@ -57,7 +57,7 @@ def userAuth():
             accessLevel = None
             break
 
-#Main function for the learning platform access system
+#Main function for the smart notification system
 def systemLoop():
     #Loop to continue execution of program
     while True:
