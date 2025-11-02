@@ -18,7 +18,9 @@ accessLevel = ''
 
 #Checks username and password against the users list of dictionaries
 def userLogin():
+    #Declares accessLevel variable as global to be modified from within this function
     global accessLevel
+
     #Stores user inputs as username and password
     username = input("Please enter your username: ")
     password = input("Please enter your password: ")
