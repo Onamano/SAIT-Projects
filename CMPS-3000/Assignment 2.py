@@ -1,15 +1,15 @@
 
 userList = [
-	{'id': 100, 'username': 'Mike', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True},
-    {'id': 101, 'username': 'Ben', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True},
-    {'id': 102, 'username': 'Joe', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True},
-    {'id': 103, 'username': 'Adam', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True},
-    {'id': 104, 'username': 'Timmy', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True},
-    {'id': 105, 'username': 'Rhonda', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True},
-    {'id': 106, 'username': 'Deborah', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True},
-    {'id': 107, 'username': 'Rebecca', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True},
-    {'id': 108, 'username': 'Frank', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': False},
-    {'id': 109, 'username': 'Sally', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': False},
+	{'id': 100, 'username': 'Mike', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True, 'loggedIn': False},
+    {'id': 101, 'username': 'Ben', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True, 'loggedIn': False},
+    {'id': 102, 'username': 'Joe', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True, 'loggedIn': False},
+    {'id': 103, 'username': 'Adam', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True, 'loggedIn': False},
+    {'id': 104, 'username': 'Timmy', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True, 'loggedIn': False},
+    {'id': 105, 'username': 'Rhonda', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True, 'loggedIn': False},
+    {'id': 106, 'username': 'Deborah', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': True, 'loggedIn': False},
+    {'id': 107, 'username': 'Rebecca', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': True, 'loggedIn': False},
+    {'id': 108, 'username': 'Frank', 'password': 'P@ssw0rd', 'role': 'Viewer', 'subActive': False, 'loggedIn': False},
+    {'id': 109, 'username': 'Sally', 'password': 'P@ssw0rd', 'role': 'Editor', 'subActive': False, 'loggedIn': False},
     
 ]
 
@@ -25,6 +25,7 @@ def userLogin():
     for user_entry in range(len(userList)):
         if username == userList[user_entry]['username'] and password == userList[user_entry]['password']:
             print(f"Welcome {username}")
+            userList[user_entry]['loggedIn'] = True
             break
     else:
         print("Incorrect username or password")
@@ -36,15 +37,18 @@ def userAuth():
 
     #Iterates through the users list to determine the role of the active user, sets accessLevel accordingly
     for user_entry in range(len(userList)):
-        if userList[user_entry]['subActive'] == True:
+        if userList[user_entry]['subActive'] == True and userList[user_entry]['loggedIn'] == True:
             if userList[user_entry]['role'] == 'Administrator':
                 accessLevel = 'admin'
+                break
             elif userList[user_entry]['role'] == 'Editor':
                 accessLevel = 'editor'
+                break
             elif userList[user_entry]['role'] == 'Viewer':
                 accessLevel = 'viewer'
-        else:
-            print('Subscription expired, please contact system administrator to renew.')
+                break
+            else:
+                print('Subscription expired, please contact system administrator to renew.')
 
 #Main function for the learning platform access system
 def systemLoop():
