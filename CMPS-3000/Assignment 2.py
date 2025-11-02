@@ -1,4 +1,4 @@
-
+#List of dictionaries containing users information
 userList = [
 	{'id': 100, 'username': 'Mike', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True, 'loggedIn': False},
     {'id': 101, 'username': 'Ben', 'password': 'P@ssw0rd', 'role': 'Administrator', 'subActive': True, 'loggedIn': False},
@@ -13,10 +13,12 @@ userList = [
     
 ]
 
+#String used for determining user access level
 accessLevel = ''
 
 #Checks username and password against the users list of dictionaries
 def userLogin():
+    global accessLevel
     #Stores user inputs as username and password
     username = input("Please enter your username: ")
     password = input("Please enter your password: ")
@@ -28,6 +30,7 @@ def userLogin():
             userList[user_entry]['loggedIn'] = True
             break
     else:
+        accessLevel = 'NoAccess'
         print("Incorrect username or password")
 
 #Authenticates and delegates access based on if the user is logged in and has an active subscription
@@ -47,8 +50,10 @@ def userAuth():
             elif userList[user_entry]['role'] == 'Viewer':
                 accessLevel = 'viewer'
                 break
-            else:
-                print('Subscription expired, please contact system administrator to renew.')
+        #Sets accessLevel to None to denote an unactive subscription
+        elif userList[user_entry]['subActive'] == False and userList[user_entry]['loggedIn'] == True:
+            accessLevel = None
+            break
 
 #Main function for the learning platform access system
 def systemLoop():
@@ -66,22 +71,37 @@ def systemLoop():
                 while True:
                     print("Your role is: Administrator")
                     print("Permissions granted: Settings enabled")
+                    for user_entry in range(len(userList)):
+                        if userList[user_entry]['loggedIn'] == True:
+                            userList[user_entry]['loggedIn'] = False
                     break
             elif accessLevel == 'editor':
                 #Continuously loops through options until logout
                 while True:
                     print("Your role is: Editor")
                     print("Permissions granted: Editor license enabled")
+                    for user_entry in range(len(userList)):
+                        if userList[user_entry]['loggedIn'] == True:
+                            userList[user_entry]['loggedIn'] = False
                     break
             elif accessLevel == 'viewer':
                 #Continuously loops through options until logout
                 while True:
                     print("Your role is: Viewer")
                     print("Permissions granted: Viewer license enabled")
+                    for user_entry in range(len(userList)):
+                        if userList[user_entry]['loggedIn'] == True:
+                            userList[user_entry]['loggedIn'] = False
                     break
-            else:
+            elif accessLevel == None:
+                #Notifies the user that their subscription is inactive upon login
                 print("User does not have an active subscription, please contact an administrator.")
-                # print("Authentication failed, please retry")
+                for user_entry in range(len(userList)):
+                    if userList[user_entry]['loggedIn'] == True:
+                        userList[user_entry]['loggedIn'] = False
+            elif accessLevel == 'NoAccess':
+                #Notifies that the user does exist
+                print("User does not exist, contact system administrator.")
         #Exits while loop, ending execution
         elif loginOrExit == "2":
             break
