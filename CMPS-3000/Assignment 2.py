@@ -30,12 +30,12 @@ def userLogin():
     else:
         print("Incorrect username or password")
 
-#Authenticates and delegates access based on the role of the user that has logged in
+#Authenticates and delegates access based on if the user is logged in and has an active subscription
 def userAuth():
     #Declares accessLevel variable as global to be modified from within this function
     global accessLevel
 
-    #Iterates through the users list to determine the role of the active user, sets accessLevel accordingly
+    #Iterates through the users list to determine if the user is subscribed and logged in, sets accessLevel accordingly
     for user_entry in range(len(userList)):
         if userList[user_entry]['subActive'] == True and userList[user_entry]['loggedIn'] == True:
             if userList[user_entry]['role'] == 'Administrator':
@@ -80,7 +80,8 @@ def systemLoop():
                     print("Permissions granted: Viewer license enabled")
                     break
             else:
-                print("Authentication failed, please retry")
+                print("User does not have an active subscription, please contact an administrator.")
+                # print("Authentication failed, please retry")
         #Exits while loop, ending execution
         elif loginOrExit == "2":
             break
@@ -90,3 +91,4 @@ systemLoop()
 #References
 # https://stackoverflow.com/questions/52765473/how-do-i-check-for-a-user-name-and-associated-password-in-a-list-of-dictionaries
 # CMPS Course materials
+# CMPS Project 1 code: https://github.com/Onamano/SAIT-Projects/blob/main/CMPS-3000/Project1.py
