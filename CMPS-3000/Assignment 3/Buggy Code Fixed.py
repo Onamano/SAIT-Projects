@@ -8,13 +8,13 @@ class Order:
     def calculate_total(self):
         total = 0
         for item in self.items:
-            total += item[1] * item[2]  
+            total += item[1] * item[2]                          #Logic Error: Addition instead of Multiplication, "total += item[1] + item[2]"
         if total == 0:  
             return "Empty Order"
         return total
 
-    def add_item(self, item_name, quantity, price):
-        self.items.append((item_name, quantity, price))  
+    def add_item(self, item_name, quantity, price):             #Syntax Error: Missing Semicolon, "def add_item(self, item_name, quantity, price)"
+        self.items.append((item_name, quantity, price))         
 
     def remove_item(self, item_name):
         for item in self.items:  
@@ -23,16 +23,16 @@ class Order:
 
     def print_summary(self):
         print("Order Summary for", self.customer_name)
-        for item in self.items: 
+        for item in self.items:                                 #Runtime/Attribute Error: Variable name incorrect, "for item in self.itemz"
             print(f"{item[1]} x {item[0]} @ ${item[2]:.2f}")
-        print("Total: $", self.calculate_total())
+        print("Total: $", self.calculate_total())               #Syntax Error: Missing closing parenthesis, "print("Total: $", self.calculate_total()"
 
     def apply_discount(self, code): 
         if code == "SAVE10":
             return 0.1
         elif code == "SAVE20":
             return 0.2
-        elif code == "SAVE30":
+        elif code == "SAVE30":                                  #Logic Error: Missing condition for "SAVE30"
             return 0.3
 
 def main():
