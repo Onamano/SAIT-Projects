@@ -8,7 +8,7 @@ class Order:
     def calculate_total(self):
         total = 0
         for item in self.items:
-            total += item[1] + item[2]  
+            total += item[1] * item[2]  
         if total == 0:  
             return "Empty Order"
         return total
