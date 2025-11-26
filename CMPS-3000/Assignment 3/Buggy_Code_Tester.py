@@ -1,7 +1,7 @@
 import unittest
 from Buggy_Code_fixed import Order
 
-# Testing the calulate_total function in Buggy Code.py
+# Testing the calulate_total function in Buggy_Code_fixed.py
 class UnitTestTotal(unittest.TestCase):
     def test_calculate_total(self):
         instance = Order("Mike", [("Book", 3, 15.00), ("Notebook", 4, 5.00)])
@@ -19,7 +19,7 @@ class UnitTestDiscount(unittest.TestCase):
         instance = Order.apply_discount(self, code="SAVE30")
         self.assertEqual(instance, 0.3)
 
-#Tests that the functions add_item, remove_item, calculate_total, and apply_discount functions are working together.
+#Tests that the functions add_item, remove_item, and calculate_total are working together.
 class TestIntegration(unittest.TestCase):
     def test_order_integration(self):
         instance = Order("Mike", [("Book", 3, 15.00), ("Notebook", 4, 5.00), ("Pen", 5, 1.50)])
@@ -33,4 +33,5 @@ if __name__ == "__main__":
 
 # References
 # [1] https://www.geeksforgeeks.org/python/unit-testing-python-unittest/ - Unit Test Guide
+
 # [2] https://coderivers.org/blog/python-integration-testing/ - Integration Test guide
