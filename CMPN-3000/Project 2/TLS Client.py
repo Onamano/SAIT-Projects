@@ -1,6 +1,5 @@
 # Imports
 from socket import *
-from OpenSSL import *
 from ssl import *
 
 def clientSetup(serverName, serverPort, sentence):
@@ -15,8 +14,9 @@ def clientSetup(serverName, serverPort, sentence):
         # Create client socket
         clientSocket = socket(AF_INET, SOCK_STREAM)
 
-        tlsSocket = context.wrap_socket(clientSocket)
-        
+        # Wrap client socket with TLS context
+        tlsSocket = context.wrap_socket(clientSocket, server_hostname=serverName)
+
         try:
             # Connect to server
             tlsSocket.connect((serverName,serverPort))
