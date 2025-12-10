@@ -22,7 +22,7 @@ def serverSetup(serverPort, serverIP):
         context = SSLContext(PROTOCOL_TLS_SERVER)
 
         # Load self-signed certificate (None for testing)
-        context.load_cert_chain(certfile=None, keyfile=None)
+        context.load_cert_chain(certfile="server.crt", keyfile="server.key")
         
         #Accept client connection
         connectionSocket, addr = serverSocket.accept()
@@ -34,7 +34,7 @@ def serverSetup(serverPort, serverIP):
 
         # Set time limit for keeping connection open
         timeoutSeconds = 20
-        connectionSocket.settimeout(timeoutSeconds)
+        tlsConnection.settimeout(timeoutSeconds)
 
         #Receive and echo message back to client 
         while True:
@@ -47,6 +47,9 @@ def serverSetup(serverPort, serverIP):
         print("Socket connection has timed out")
 
     except ConnectionAbortedError:
+        print("Connection closed by client")
+
+    except SSLEOFError:
         print("Connection closed by client")
 
     finally:
