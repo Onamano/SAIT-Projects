@@ -17,20 +17,20 @@ def serverSetup(serverPort, serverIP):
         # Set port to listen and print confirmation to terminal
         serverSocket.listen(1)
         print("The server is ready to receive")
-        
+
         # Define context for TLS
         context = SSLContext(PROTOCOL_TLS_SERVER)
 
-        # Load self-signed certificate (None for testing)
+        # Load self-signed certificate and key file
         context.load_cert_chain(certfile="server.crt", keyfile="server.key")
-        
-        #Accept client connection
+
+        # Accept client connection
         connectionSocket, addr = serverSocket.accept()
         print("Connected with:", addr)
 
         # Wrap TCP socket with TLS context
         tlsConnection = context.wrap_socket(connectionSocket, server_side=True)
-        print("TLS handshake completed with:", addr)
+        print("TLS context established:", addr)
 
         # Set time limit for keeping connection open
         timeoutSeconds = 20
