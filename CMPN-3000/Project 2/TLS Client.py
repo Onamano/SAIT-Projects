@@ -5,9 +5,9 @@ from ssl import *
 def clientSetup(serverName, serverPort, sentence):
     try:
         # Define context for TLS
-        context = create_default_context()
+        context = SSLContext(PROTOCOL_TLS_CLIENT)
 
-        # For testing purposes
+        # For use with self-signed certificate
         context.check_hostname = False
         context.verify_mode = CERT_NONE
 
