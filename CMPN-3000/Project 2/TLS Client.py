@@ -68,3 +68,4 @@ if __name__ == "__main__":
 # https://stackoverflow.com/questions/42792834/python-continuous-tcp-connection
 # https://labex.io/tutorials/python-how-to-implement-error-handling-in-python-socket-communication-398023
 # https://realpython.com/python-sockets
+# https://docs.python.org/3/library/ssl.html
